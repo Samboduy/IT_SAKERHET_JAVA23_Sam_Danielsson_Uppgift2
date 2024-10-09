@@ -1,5 +1,3 @@
-package com.example.IT_SAKERHET_JAVA23_Sam_Danielsson_Uppgift2;
-
 import java.security.MessageDigest;
 
 public class HashPassword {
