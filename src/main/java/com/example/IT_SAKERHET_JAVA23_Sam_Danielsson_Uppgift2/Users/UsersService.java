@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsersService {
-
-     JWT jwt = new JWT();
-     SecretKey secretKey = new SecretKey();
+    @Autowired
+     JWT jwt;
+    @Autowired
+     SecretKey secretKey;
 
     @Autowired
     UsersRepository usersRepository;
@@ -28,7 +29,7 @@ public class UsersService {
         Users DBUser = getUser(userEmail);
         if (userEmail.equals(DBUser.getEmail()) && userPassword.equals(DBUser.getPassword())){
             secretKey.generateSecretKey();
-            jwt.generateJWT(String.valueOf(DBUser.getId()),secretKey.getSecretKey());
+            jwt.generateJWT(DBUser.getEmail(),secretKey.getSecretKey());
             String generatedJWT = jwt.getGeneratedJWT();
             return  ResponseEntity.ok(generatedJWT);
         }
